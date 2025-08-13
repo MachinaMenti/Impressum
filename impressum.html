@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Impressum – Machina Menti</title>
+<style>
+:root{
+  --mm-blue:#7fd4f9;--stroke:rgba(255,255,255,.1);--glow:rgba(127,212,249,.4);
+}
+body{
+  margin:0;font-family:sans-serif;
+  background:url('Hintergrund.png') no-repeat center center fixed;
+  background-size:cover;color:#fff;
+  animation:fadeIn 1s ease forwards;
+}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.container{display:flex;justify-content:center;padding:2rem}
+.card{
+  background:rgba(0,0,0,.6);
+  border-radius:20px;
+  box-shadow:0 0 40px var(--glow);
+  max-width:900px;width:100%;overflow:hidden;
+  border:2px solid var(--mm-blue);
+  animation:neonPulse 2s infinite alternate;
+  text-align:center;
+  position:relative;
+}
+@keyframes neonPulse{from{box-shadow:0 0 10px var(--mm-blue)}to{box-shadow:0 0 25px var(--mm-blue)}}
+.banner-wrap{position:relative;overflow:hidden}
+.banner-inner{width:100%;display:block;}
+.card-content{padding:2rem;position:relative}
+.card-content .link-button{
+  color:var(--mm-blue);
+  text-decoration:none;
+  position:relative;
+  transition:all .3s;
+  padding:0.4rem 0.8rem;
+  border:1px solid var(--mm-blue);
+  border-radius:12px;
+  margin:0 0.3rem;
+  display:inline-block;
+}
+.card-content .link-button:hover{
+  text-shadow:0 0 8px var(--mm-blue);
+  background:rgba(127,212,249,0.1);
+  transform:scale(1.05);
+}
+.card-content #mailto{
+  color:var(--mm-blue);
+  text-decoration:none;
+}
+.card-content #mailto:hover{
+  text-shadow:0 0 8px var(--mm-blue);
+}
+.abwaerts-logo{
+  position:absolute;
+  bottom:20px;
+  left:50%;
+  transform:translateX(-50%);
+  width:150px;
+  animation:floatLogo 4s ease-in-out infinite;
+}
+@keyframes floatLogo{
+  0%,100%{transform:translateX(-50%) translateY(0);}
+  50%{transform:translateX(-50%) translateY(-10px);}
+}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(12px);background:rgba(5,15,25,.9);border:1px solid var(--stroke);color:var(--mm-blue);padding:.6rem .9rem;border-radius:12px;box-shadow:0 10px 30px var(--glow);opacity:0;transition:opacity .25s, transform .25s}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.particles{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:-1}
+</style>
+</head>
+<body>
+<canvas class="particles"></canvas>
+<div class="container">
+  <div class="card">
+    <div class="banner-wrap">
+      <img src="MM_Banner.png" alt="Machina Menti Banner" class="banner-inner">
+    </div>
+    <div class="card-content">
+      <h1><b>Machina Menti</b></h1>
+      <h2>Impressum</h2>
+      <p>Angaben gemäß § 5 TMG</p>
+      <p>Machina Menti – Andrea Lichtinger<br>c/o Impressumsdienst<br>Mustermannstraße 1<br>12345 Musterstadt</p>
+      <p>E-Mail: <a id="mailto" href="mailto:machinamenti@gmx.de">machinamenti@gmx.de</a></p>
+      <p>
+        <a class="link-button" href="https://open.spotify.com/artist/5E1CPavfrZKKY8iNHr30iB" target="_blank">Spotify</a>
+        <a class="link-button" href="https://www.youtube.com/@Machina_Menti" target="_blank">YouTube</a>
+        <a class="link-button" href="https://music.amazon.de/artists/B0FH5PP1GY/machina-menti" target="_blank">Amazon Music</a>
+        <a class="link-button" href="https://www.instagram.com/machinamenti" target="_blank">Instagram</a>
+        <a class="link-button" href="https://www.tiktok.com/@machinamenti" target="_blank">TikTok</a>
+      </p>
+      <br>
+      <h3>Haftungsausschluss für Links</h3>
+      <p>Unser Angebot enthält Links zu externen Webseiten Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich. Die verlinkten Seiten wurden zum Zeitpunkt der Verlinkung auf mögliche Rechtsverstöße überprüft. Rechtswidrige Inhalte waren zum Zeitpunkt der Verlinkung nicht erkennbar. Eine permanente inhaltliche Kontrolle der verlinkten Seiten ist jedoch ohne konkrete Anhaltspunkte einer Rechtsverletzung nicht zumutbar. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Links umgehend entfernen.</p>
+      <br><br><br><br><br>
+    </div>
+    <img src="logo-abwaertskompatibel.png" alt="Abwärtskompatibel Logo" class="abwaerts-logo">
+  </div>
+</div>
+<div id="toast" class="toast">E-Mail kopiert</div>
+<script>
+// Copy-Mail Funktion
+const mail=document.getElementById('mailto');
+mail.addEventListener('click',e=>{
+  e.preventDefault();
+  navigator.clipboard.writeText(mail.textContent).then(()=>{
+    const toast=document.getElementById('toast');
+    toast.classList.add('show');
+    setTimeout(()=>toast.classList.remove('show'),1500);
+  });
+});
+// Partikel Animation
+const canvas=document.querySelector('.particles'),ctx=canvas.getContext('2d');
+let w,h,particles=[];
+function resize(){w=canvas.width=window.innerWidth;h=canvas.height=window.innerHeight;}
+window.addEventListener('resize',resize);resize();
+for(let i=0;i<50;i++){particles.push({x:Math.random()*w,y:Math.random()*h,r:Math.random()*2+1,dx:(Math.random()-0.5)*0.5,dy:(Math.random()-0.5)*0.5});}
+function draw(){ctx.clearRect(0,0,w,h);ctx.fillStyle=varColor;particles.forEach(p=>{ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill();p.x+=p.dx;p.y+=p.dy;if(p.x<0||p.x>w)p.dx*=-1;if(p.y<0||p.y>h)p.dy*=-1;});requestAnimationFrame(draw);}
+const varColor='rgba(127,212,249,0.6)';draw();
+</script>
+</body>
+</html>
