@@ -6,153 +6,118 @@
   <title>Impressum – Machina Menti</title>
   <style>
     :root{
-      --mm-blue:#7fd4f9;
-      --ink:#e0faff;
-      --panel:rgba(5,15,25,.70); /* etwas transparenter */
+      --mm-blue:#7fd4f9;           /* Machina‑Menti Blau */
+      --ink:#e0faff;               /* Textfarbe */
+      --panel:rgba(5,15,25,.56);   /* stärker transparent, damit Partikel überall sichtbar sind */
       --stroke:rgba(139,233,253,.28);
       --glow:rgba(0,191,255,.35);
     }
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
-      margin:0;
-      font-family:system-ui,Segoe UI,Roboto,Arial,sans-serif;
-      color:var(--ink);
-      background:url('Hintergrund.png') no-repeat center center fixed;
-      background-size:cover;
+      margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink);
+      background:url('Hintergrund.png') no-repeat center center fixed;background-size:cover;
     }
+
+    /* Layout */
     .container{display:flex;justify-content:center;padding:32px}
     .card{
+      position:relative;
       background:var(--panel);
+      backdrop-filter:saturate(130%) blur(6px); /* lässt Partikel hinter der Card sichtbar, aber Text lesbar */
+      -webkit-backdrop-filter:saturate(130%) blur(6px);
       border:1px solid var(--stroke);
       box-shadow:0 12px 50px var(--glow);
-      border-radius:24px;
-      max-width:960px;
-      width:100%;
-      overflow:hidden;
-      position:relative;
-      text-align:center;
+      border-radius:24px;max-width:960px;width:100%;overflow:hidden;text-align:center;
       animation:neonPulse 4s ease-in-out infinite alternate;
     }
-    @keyframes neonPulse{
-      from{box-shadow:0 0 8px var(--mm-blue)}
-      to{box-shadow:0 0 18px var(--mm-blue)}
-    }
+    @keyframes neonPulse{from{box-shadow:0 0 8px var(--mm-blue)}to{box-shadow:0 0 18px var(--mm-blue)}}
+
+    /* Banner */
     .banner-wrap{position:relative;overflow:hidden}
     .banner-inner{width:100%;height:auto;display:block}
-    .card-content{padding:28px 22px 160px}
+
+    /* Inhalt */
+    .card-content{position:relative; z-index:1; padding:28px 22px 150px}
     .card-content h1{color:var(--mm-blue);font-size:2rem;margin:.1rem 0 .2rem;text-shadow:0 0 10px rgba(127,212,249,.25)}
     .card-content h2{font-weight:600;margin:.2rem 0 1rem;color:#bfefff;text-shadow:0 0 10px rgba(127,212,249,.25)}
+    .card-content h3{color:#bfefff;margin:1.2rem 0 .4rem}
     .card-content p{line-height:1.7;margin:.45rem 0}
-    #mailto{color:var(--mm-blue);text-decoration:none}
-    #mailto:hover{text-shadow:0 0 8px var(--mm-blue)}
-    .link-button{
-      color:var(--mm-blue);
-      text-decoration:none;
-      display:inline-block;
-      margin:.12rem .25rem;
-      padding:.45rem .9rem;
-      border:1px solid var(--mm-blue);
-      border-radius:12px;
-      background:rgba(127,212,249,.14);
-      transition:transform .2s, box-shadow .2s, background .2s
-    }
-    .link-button:hover{
-      transform:translateY(-1px);
-      box-shadow:0 10px 20px rgba(127,212,249,.25);
-      background:rgba(127,212,249,.24)
-    }
+
+    /* Links */
+    .machina-link,#mailto{color:var(--mm-blue);text-decoration:underline;text-underline-offset:3px}
+    .machina-link:hover,#mailto:hover{text-shadow:0 0 8px var(--mm-blue)}
+
+    /* Social Buttons */
+    .link-button{color:var(--mm-blue);text-decoration:none;display:inline-block;margin:.12rem .25rem;padding:.45rem .9rem;border:1px solid var(--mm-blue);border-radius:12px;background:rgba(127,212,249,.14);transition:transform .2s, box-shadow .2s, background .2s}
+    .link-button:hover{transform:translateY(-1px);box-shadow:0 10px 20px rgba(127,212,249,.25);background:rgba(127,212,249,.24)}
+
+    /* Formular */
     .mm-form{margin:1rem auto 1.2rem;max-width:760px;text-align:left}
     .mm-form .form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
-    .mm-form label{display:block}
-    .mm-form .form-grid>label{min-width:0}
-    .mm-form .full{grid-column:1/-1;margin-top:8px}
     .mm-form label span{display:block;margin:.35rem 0 .25rem;font-size:.95rem;color:var(--mm-blue)}
-    .mm-form input,.mm-form textarea{
-      width:100%;
-      padding:.7rem .9rem;
-      border-radius:14px;
-      border:1px solid var(--stroke);
-      background:rgba(255,255,255,.07);
-      color:#fff;
-      outline:none;
-      transition:border .2s, box-shadow .2s
-    }
-    .mm-form input:focus,.mm-form textarea:focus{
-      border-color:var(--mm-blue);
-      box-shadow:0 0 0 4px rgba(127,212,249,.22)
-    }
-    .form-actions{
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:16px;
-      margin-top:.6rem;
-      flex-wrap:nowrap
-    }
-    .consent{
-      display:flex;
-      align-items:flex-start;
-      gap:10px;
-      flex:1;
-      justify-content:center
-    }
-    .consent input{margin-top:2px}
-    .consent span{line-height:1.35;text-align:center;max-width:560px}
-    .consent a{color:var(--mm-blue);text-decoration:underline}
-    .btn-submit{
-      background:rgba(127,212,249,.18);
-      color:var(--mm-blue);
-      border:1px solid var(--mm-blue);
-      border-radius:12px;
-      padding:.7rem 1rem;
-      font-weight:700;
-      cursor:pointer;
-      transition:transform .2s, box-shadow .2s, background .2s
-    }
-    .btn-submit:hover{
-      transform:translateY(-2px);
-      box-shadow:0 10px 20px rgba(127,212,249,.35);
-      background:rgba(127,212,249,.28)
-    }
-    .form-note{font-size:.92rem;opacity:.9;margin-top:.5rem}
+    .mm-form input,.mm-form textarea{width:100%;padding:.7rem .9rem;border-radius:14px;border:1px solid var(--stroke);background:rgba(255,255,255,.07);color:#fff;outline:none;transition:border .2s, box-shadow .2s}
+    .mm-form input:focus,.mm-form textarea:focus{border-color:var(--mm-blue);box-shadow:0 0 0 4px rgba(127,212,249,.22)}
+
+    /* Aktionen-Zeile – Checkbox bündig mit erster Zeile */
+    .form-actions{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-top:.6rem;flex-wrap:nowrap}
+    .consent{display:flex;align-items:flex-start;gap:10px;flex:1;justify-content:center}
+    .consent input[type="checkbox"]{margin-top:2px}
+    .consent span{display:inline-block;line-height:1.35;text-align:center;max-width:560px}
+    .consent a{color:var(--mm-blue);text-decoration:underline;text-underline-offset:3px;cursor:pointer;transition:text-shadow .2s}
+    .consent a:hover{text-shadow:0 0 8px var(--mm-blue)}
+
+    .btn-submit{background:rgba(127,212,249,.18);color:var(--mm-blue);border:1px solid var(--mm-blue);border-radius:12px;padding:.7rem 1rem;font-weight:700;cursor:pointer;transition:transform .2s, box-shadow .2s, background .2s}
+    .btn-submit:hover{transform:translateY(-2px);box-shadow:0 10px 20px rgba(127,212,249,.35);background:rgba(127,212,249,.28)}
+
+    /* Meldungen */
     .form-messages{margin-top:.8rem;min-height:1.4rem}
     .form-messages .ok,.form-messages .err{padding:.6rem .8rem;border-radius:10px}
     .form-messages .ok{background:rgba(40,180,99,.15);border:1px solid rgba(40,180,99,.35);color:#a8ffcf}
     .form-messages .err{background:rgba(231,76,60,.15);border:1px solid rgba(231,76,60,.35);color:#ffd6d2}
-    .abwaerts-logo{
-      position:absolute;
-      left:50%;
-      bottom:14px;
-      transform:translateX(-50%);
-      width:150px;
-      animation:floatLogo 4s ease-in-out infinite
-    }
-    @keyframes floatLogo{
-      0%,100%{transform:translateX(-50%) translateY(0)}
-      50%{transform:translateX(-50%) translateY(-10px)}
-    }
+
+    /* Footer-Logo (schwebend) */
+    .abwaerts-logo{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);width:150px;animation:floatLogo 4s ease-in-out infinite}
+    @keyframes floatLogo{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-10px)}}
+
+    /* Partikel-Canvas hinter allem */
     .particles{position:fixed;inset:0;pointer-events:none;z-index:-1}
+
+    /* Responsiv */
     @media (max-width:900px){
       .mm-form .form-grid{grid-template-columns:1fr}
       .form-actions{flex-direction:column;align-items:stretch}
       .btn-submit{width:100%}
+      .consent{justify-content:flex-start}
+      .consent span{text-align:left}
+    }
+
+    /* Bewegungs-Reduktion */
+    @media (prefers-reduced-motion: reduce){
+      .card{animation:none}
+      .abwaerts-logo{animation:none}
     }
   </style>
 </head>
 <body>
+  <!-- Partikel-Hintergrund per JS erzeugt -->
   <canvas class="particles"></canvas>
+
   <div class="container">
     <div class="card">
       <div class="banner-wrap">
         <img src="MM_Banner.png" alt="Machina Menti Banner" class="banner-inner" />
       </div>
+
       <div class="card-content">
         <h1><b>Machina Menti</b></h1>
         <h2>Impressum</h2>
-        <p>Angaben gemäß § 5 TMG</p>
+        <p>Angaben gemäß § 5 DDG</p>
         <p>Andrea Lichtinger<br>c/o LEADERLY UG (haftungsbeschränkt)<br>Amtstraße 22<br>44575 Castrop-Rauxel</p>
-        <p>E-Mail: <a id="mailto" href="mailto:MachinaMenti@gmx.de">MachinaMenti@gmx.de</a></p>
+        <p>E‑Mail: <a id="mailto" class="machina-link" href="mailto:MachinaMenti@gmx.de">MachinaMenti@gmx.de</a></p>
+
+        <h3>Verantwortliche nach § 18 Abs. 2 MStV</h3>
+        <p>Verantwortlich für die Inhalte dieser Seiten: Andrea Lichtinger, Anschrift wie oben.</p>
 
         <p>
           <a class="link-button" href="https://open.spotify.com/artist/5E1CPavfrZKKY8iNHr30iB" target="_blank" rel="noopener">Spotify</a>
@@ -161,24 +126,22 @@
           <a class="link-button" href="https://www.instagram.com/machinamenti" target="_blank" rel="noopener">Instagram</a>
           <a class="link-button" href="https://www.tiktok.com/@machinamenti" target="_blank" rel="noopener">TikTok</a>
         </p>
+        <p style="opacity:.85">Hinweis: Beim Klick auf diese Links werden Daten (z. B. IP‑Adresse, Browser‑Infos) an den jeweiligen Anbieter übermittelt.</p>
 
-        <h3 style="margin-top:1.2rem;color:#bfefff">Kontaktformular</h3>
-        <form id="contact" class="mm-form" action="https://formspree.io/f/xnnzrvqb" method="POST" autocomplete="on">
+        <h3 style="margin-top:1.2rem">Kontaktformular</h3>
+        <form id="contact" class="mm-form" action="https://formspree.io/f/xnnzrvqb" method="POST" autocomplete="on" novalidate>
           <input type="hidden" name="_subject" value="Neue Nachricht über das Impressum" />
           <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true" />
-
           <div class="form-grid">
-            <label><span>Name*</span><input type="text" name="name" required /></label>
-            <label><span>E-Mail*</span><input type="email" name="email" inputmode="email" autocomplete="email" required /></label>
+            <label for="name"><span>Name*</span><input id="name" type="text" name="name" required /></label>
+            <label for="email"><span>E‑Mail*</span><input id="email" type="email" name="email" inputmode="email" autocomplete="email" required /></label>
           </div>
-          <label class="full"><span>Nachricht*</span><textarea name="message" rows="5" required></textarea></label>
-
-          <div class="g-recaptcha" data-sitekey="6LdhZKYrAAAAABLaSyfvjarNc8qMKozjZJqOspHk"></div>
+          <label class="full" for="message"><span>Nachricht*</span><textarea id="message" name="message" rows="5" required></textarea></label>
 
           <div class="form-actions">
-            <label class="consent">
-              <input type="checkbox" name="consent" required />
-              <span><a href="#datenschutz">Ich habe den Datenschutzhinweis</a> gelesen und stimme der Verarbeitung zur Beantwortung meiner Anfrage zu.</span>
+            <label class="consent" for="consent">
+              <input id="consent" type="checkbox" name="consent" required />
+              <span>Ich habe den <a class="machina-link" href="#datenschutz">Datenschutzhinweis</a> unten gelesen und stimme der Verarbeitung zur Beantwortung meiner Anfrage zu.</span>
             </label>
             <button type="submit" class="btn-submit">Nachricht senden</button>
           </div>
@@ -187,37 +150,68 @@
           <div class="form-messages" role="status" aria-live="polite" aria-atomic="true"></div>
         </form>
 
-        <h3 id="datenschutz" style="color:#bfefff">Datenschutzhinweis zum Kontaktformular</h3>
-        <p>Verantwortlich: Andrea Lichtinger (Adresse wie oben). Zweck der Verarbeitung: Beantwortung deiner Anfrage (Art. 6 Abs. 1 lit. f DSGVO, ggf. lit. b). Empfänger: Formspree (Auftragsverarbeitung). Es werden Name, E-Mail und Nachricht übermittelt. Die Daten werden nur so lange gespeichert, wie es zur Bearbeitung erforderlich ist. Keine Werbenutzung.</p>
+        <!-- Datenschutzhinweis / Datenschutz -->
+        <h3 id="datenschutz">Datenschutzhinweis</h3>
+        <p><strong>Verantwortliche:</strong> Andrea Lichtinger (Adresse wie oben). <strong>Zweck:</strong> Beantwortung deiner Anfrage. <strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse), bei Vertragsanbahnung zusätzlich Art. 6 Abs. 1 lit. b DSGVO.</p>
 
-        <h3 style="color:#bfefff">Haftungsausschluss für Links</h3>
-        <p>Unser Angebot enthält Links zu externen Webseiten Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich. Die verlinkten Seiten wurden zum Zeitpunkt der Verlinkung auf mögliche Rechtsverstöße überprüft. Rechtswidrige Inhalte waren zum Zeitpunkt der Verlinkung nicht erkennbar. Eine permanente inhaltliche Kontrolle der verlinkten Seiten ist jedoch ohne konkrete Anhaltspunkte einer Rechtsverletzung nicht zumutbar. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Links umgehend entfernen.</p>
+        <h4>Formspree (Formular‑Dienst)</h4>
+        <p>Für das Formular nutzen wir <strong>Formspree</strong> (Formspree Inc., USA) als Auftragsverarbeiter. Die Übermittlung kann in die USA erfolgen. Schutz durch <strong>Standardvertragsklauseln</strong> (Art. 46 DSGVO) und <strong>Auftragsverarbeitungsvertrag</strong> (Art. 28 DSGVO). Übermittelt werden Name, E‑Mail und Nachricht.</p>
+
+        <h4>Hosting &amp; Server‑Logs (GitHub Pages)</h4>
+        <p>Die Seite wird über <strong>GitHub Pages</strong> ausgeliefert. Dabei können serverseitig Logfiles (IP‑Adresse, Datum/Uhrzeit, URL, Referrer, User‑Agent) verarbeitet werden. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO (Betrieb/Sicherheit). Details: <a class="machina-link" href="https://docs.github.com/site-policy/privacy-policies/github-privacy-statement" target="_blank" rel="noopener">GitHub‑Datenschutzerklärung</a>.</p>
+
+        <h4>Externe Links / Social‑Media</h4>
+        <p>Beim Anklicken externer Links (z. B. Spotify, YouTube, Instagram, TikTok, Amazon Music) werden Daten (z. B. IP‑Adresse, Browser‑Infos) an diese Anbieter übertragen. Auf deren Datenverarbeitung haben wir keinen Einfluss.</p>
+
+        <h4>Speicherdauer &amp; Rechte</h4>
+        <p>Anfragen löschen wir in der Regel innerhalb von <strong>6 Monaten</strong>, sofern keine gesetzlichen Pflichten entgegenstehen. Du hast Rechte auf Auskunft, Berichtigung, Löschung, Einschränkung, Widerspruch sowie Datenübertragbarkeit (Art. 15–21 DSGVO) und das Recht auf Beschwerde bei einer Aufsichtsbehörde. Zuständig: <a class="machina-link" href="https://www.ldi.nrw.de" target="_blank" rel="noopener">LDI NRW</a>.</p>
+
+        <h3>Urheberrecht</h3>
+        <p>Eigene Inhalte (Texte, Grafiken, Audio/Artwork) unterliegen dem deutschen Urheberrecht. Auch <strong>Marken, Logos und sonstige geschützte Kennzeichen</strong> sind geschützt. Verwendungen außerhalb der Schranken bedürfen der vorherigen Zustimmung der Rechteinhaber.</p>
+
+        <h3>Haftungsausschluss für Links</h3>
+        <p>Für Inhalte verlinkter Seiten sind ausschließlich deren Betreiber verantwortlich. Rechtswidrige Inhalte waren zum Zeitpunkt der Verlinkung nicht erkennbar. Bei Bekanntwerden von Rechtsverletzungen entfernen wir derartige Links umgehend.</p>
       </div>
+
+      <!-- Fuß-Logo aktiv -->
       <img src="logo-abwaertskompatibel.png" alt="Abwärtskompatibel Logo" class="abwaerts-logo" />
     </div>
   </div>
 
-  <script src="https://www.google.com/recaptcha/api.js?hl=de" async defer></script>
-
   <script>
+  // Partikel-Hintergrund (gleichmäßig über ganze Seite)
   (function(){
-    const cvs=document.querySelector('.particles');
+    const cvs=document.querySelector('canvas.particles');
     const ctx=cvs.getContext('2d');
-    let w,h; const DPR=Math.min(2, window.devicePixelRatio||1);
+    let w=0,h=0; const DPR=Math.min(2, window.devicePixelRatio||1);
     function resize(){
-      w=innerWidth; h=innerHeight;
+      const bw=document.documentElement.clientWidth;
+      const bh=document.documentElement.clientHeight;
+      if(bw===w && bh===h) return;
+      w=bw; h=bh;
       cvs.width=w*DPR; cvs.height=h*DPR;
       cvs.style.width=w+'px'; cvs.style.height=h+'px';
       ctx.setTransform(DPR,0,0,DPR,0,0);
+      // Re‑seed Partikel bei Größenänderung, damit sie nicht auf eine Seite „driften“
+      seed();
     }
-    addEventListener('resize',resize,{passive:true}); resize();
-    const isMobile=matchMedia('(max-width:640px)').matches;
-    const N=isMobile?18:36;
-    const P=Array.from({length:N},()=>({x:Math.random()*w,y:Math.random()*h,r:1+Math.random()*2,dx:(Math.random()-.5)*0.35,dy:(Math.random()-.5)*0.35}));
-    let running=true; document.addEventListener('visibilitychange',()=>{ running=!document.hidden; });
+    addEventListener('resize',resize,{passive:true});
+
+    let P=[]; const BASE_DENSITY=0.00005; // Partikel pro Pixel (skaliert mit Fläche)
+    function seed(){
+      const area=w*h; const count=Math.max(20, Math.floor(area*BASE_DENSITY));
+      P=Array.from({length:count},()=>({
+        x:Math.random()*w,
+        y:Math.random()*h,
+        r:1+Math.random()*2,
+        dx:(Math.random()-.5)*0.35,
+        dy:(Math.random()-.5)*0.35
+      }));
+    }
+
     function tick(){
-      if(!running){ requestAnimationFrame(tick); return; }
-      ctx.clearRect(0,0,w,h); ctx.fillStyle='rgba(127,212,249,0.6)';
+      ctx.clearRect(0,0,w,h);
+      ctx.fillStyle='rgba(127,212,249,0.65)';
       for(const p of P){
         ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fill();
         p.x+=p.dx; p.y+=p.dy;
@@ -226,9 +220,22 @@
       }
       requestAnimationFrame(tick);
     }
+
+    resize(); // initiale Größe + seed
     tick();
   })();
 
+  // Smooth Scroll für interne Links (z. B. #datenschutz)
+  (function(){
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+      link.addEventListener('click', function(e) {
+        const href=this.getAttribute('href');
+        if(href && href.startsWith('#')){ e.preventDefault(); const target=document.querySelector(href); if(target) target.scrollIntoView({ behavior:'smooth' }); }
+      });
+    });
+  })();
+
+  // AJAX Submit für Formspree: Erfolg/Fehler inline anzeigen
   (function(){
     const form=document.getElementById('contact'); if(!form) return;
     const btn=form.querySelector('.btn-submit'); const box=form.querySelector('.form-messages');
@@ -237,20 +244,10 @@
       try{
         const fd=new FormData(form);
         const r=await fetch(form.action,{method:'POST',body:fd,headers:{'Accept':'application/json'}});
-        if(r.ok){
-          form.reset();
-          box.innerHTML='<div class="ok">Nachricht gesendet – danke! Wir melden uns so schnell wie möglich.</div>';
-        } else {
-          const data=await r.json().catch(()=>({}));
-          const msg=(data&&data.errors&&data.errors[0]&&data.errors[0].message)||'Leider gab es ein Problem beim Senden.';
-          box.innerHTML='<div class="err">'+msg+' Bitte versuche es später erneut.</div>';
-        }
-      }catch(err){
-        box.innerHTML='<div class="err">Netzwerkfehler. Prüfe deine Verbindung und versuche es erneut.</div>';
-      }
-      finally{
-        btn.disabled=false; btn.textContent='Nachricht senden';
-      }
+        if(r.ok){ form.reset(); box.innerHTML='<div class="ok">Nachricht gesendet – danke! Wir melden uns so schnell wie möglich.</div>'; }
+        else{ const data=await r.json().catch(()=>({})); const msg=(data&&data.errors&&data.errors[0]&&data.errors[0].message)||'Leider gab es ein Problem beim Senden.'; box.innerHTML='<div class="err">'+msg+' Bitte versuche es später erneut.</div>'; }
+      }catch(err){ box.innerHTML='<div class="err">Netzwerkfehler. Prüfe deine Verbindung und versuche es erneut.</div>'; }
+      finally{ btn.disabled=false; btn.textContent='Nachricht senden'; }
     });
   })();
   </script>
