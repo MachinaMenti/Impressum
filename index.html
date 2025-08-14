@@ -6,30 +6,29 @@
   <title>Impressum – Machina Menti</title>
   <style>
     :root{
-      --mm-blue:#7fd4f9;
-      --ink:#e0faff;
-      --panel:rgba(5,15,25,.86);
+      --mm-blue:#7fd4f9;           /* Machina‑Menti Blau */
+      --ink:#e0faff;               /* Textfarbe */
+      --panel:rgba(5,15,25,.56);   /* stärker transparent, damit Partikel überall sichtbar sind */
       --stroke:rgba(139,233,253,.28);
       --glow:rgba(0,191,255,.35);
     }
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
-      margin:0;
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-      color:var(--ink);
-      background:url('Hintergrund.png') no-repeat center center fixed;
-      background-size:cover;
+      margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink);
+      background:url('Hintergrund.png') no-repeat center center fixed;background-size:cover;
     }
 
     /* Layout */
     .container{display:flex;justify-content:center;padding:32px}
     .card{
+      position:relative;
       background:var(--panel);
+      backdrop-filter:saturate(130%) blur(6px); /* lässt Partikel hinter der Card sichtbar, aber Text lesbar */
+      -webkit-backdrop-filter:saturate(130%) blur(6px);
       border:1px solid var(--stroke);
       box-shadow:0 12px 50px var(--glow);
-      border-radius:24px;max-width:960px;width:100%;
-      overflow:hidden;position:relative;text-align:center;
+      border-radius:24px;max-width:960px;width:100%;overflow:hidden;text-align:center;
       animation:neonPulse 4s ease-in-out infinite alternate;
     }
     @keyframes neonPulse{from{box-shadow:0 0 8px var(--mm-blue)}to{box-shadow:0 0 18px var(--mm-blue)}}
@@ -39,62 +38,45 @@
     .banner-inner{width:100%;height:auto;display:block}
 
     /* Inhalt */
-    .card-content{padding:28px 22px 140px}
+    .card-content{position:relative; z-index:1; padding:28px 22px 150px}
     .card-content h1{color:var(--mm-blue);font-size:2rem;margin:.1rem 0 .2rem;text-shadow:0 0 10px rgba(127,212,249,.25)}
     .card-content h2{font-weight:600;margin:.2rem 0 1rem;color:#bfefff;text-shadow:0 0 10px rgba(127,212,249,.25)}
     .card-content h3{color:#bfefff;margin:1.2rem 0 .4rem}
     .card-content p{line-height:1.7;margin:.45rem 0}
 
-    /* Link-Styles (erzwinge unser Blau in allen Zuständen) */
-    .machina-link,#mailto{
-      color:var(--mm-blue);
-      text-decoration:underline;
-      text-underline-offset:3px;
-    }
-    .machina-link:hover,#mailto:hover{ text-shadow:0 0 8px var(--mm-blue) }
-    .machina-link:link,.machina-link:visited,#mailto:link,#mailto:visited{ color:var(--mm-blue) }
-    .machina-link:active,#mailto:active{ color:var(--mm-blue) }
+    /* Links */
+    .machina-link,#mailto{color:var(--mm-blue);text-decoration:underline;text-underline-offset:3px}
+    .machina-link:hover,#mailto:hover{text-shadow:0 0 8px var(--mm-blue)}
 
     /* Social Buttons */
-    .link-button{
-      color:var(--mm-blue);text-decoration:none;display:inline-block;margin:.12rem .25rem;
-      padding:.45rem .9rem;border:1px solid var(--mm-blue);border-radius:12px;background:rgba(127,212,249,.14);
-      transition:transform .2s, box-shadow .2s, background .2s
-    }
+    .link-button{color:var(--mm-blue);text-decoration:none;display:inline-block;margin:.12rem .25rem;padding:.45rem .9rem;border:1px solid var(--mm-blue);border-radius:12px;background:rgba(127,212,249,.14);transition:transform .2s, box-shadow .2s, background .2s}
     .link-button:hover{transform:translateY(-1px);box-shadow:0 10px 20px rgba(127,212,249,.25);background:rgba(127,212,249,.24)}
 
     /* Formular */
     .mm-form{margin:1rem auto 1.2rem;max-width:760px;text-align:left}
     .mm-form .form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
     .mm-form label span{display:block;margin:.35rem 0 .25rem;font-size:.95rem;color:var(--mm-blue)}
-    .mm-form input,.mm-form textarea{
-      width:100%;padding:.7rem .9rem;border-radius:14px;border:1px solid var(--stroke);
-      background:rgba(255,255,255,.07);color:#fff;outline:none;transition:border .2s, box-shadow .2s
-    }
+    .mm-form input,.mm-form textarea{width:100%;padding:.7rem .9rem;border-radius:14px;border:1px solid var(--stroke);background:rgba(255,255,255,.07);color:#fff;outline:none;transition:border .2s, box-shadow .2s}
     .mm-form input:focus,.mm-form textarea:focus{border-color:var(--mm-blue);box-shadow:0 0 0 4px rgba(127,212,249,.22)}
 
-    /* Aktionen-Zeile (Checkbox bündig zur ersten Textzeile) */
+    /* Aktionen-Zeile – Checkbox bündig mit erster Zeile */
     .form-actions{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-top:.6rem;flex-wrap:nowrap}
     .consent{display:flex;align-items:flex-start;gap:10px;flex:1;justify-content:center}
     .consent input[type="checkbox"]{margin-top:2px}
     .consent span{display:inline-block;line-height:1.35;text-align:center;max-width:560px}
     .consent a{color:var(--mm-blue);text-decoration:underline;text-underline-offset:3px;cursor:pointer;transition:text-shadow .2s}
-    .consent a:hover{ text-shadow:0 0 8px var(--mm-blue) }
+    .consent a:hover{text-shadow:0 0 8px var(--mm-blue)}
 
-    .btn-submit{
-      background:rgba(127,212,249,.18);color:var(--mm-blue);
-      border:1px solid var(--mm-blue);border-radius:12px;padding:.7rem 1rem;font-weight:700;cursor:pointer;
-      transition:transform .2s, box-shadow .2s, background .2s
-    }
+    .btn-submit{background:rgba(127,212,249,.18);color:var(--mm-blue);border:1px solid var(--mm-blue);border-radius:12px;padding:.7rem 1rem;font-weight:700;cursor:pointer;transition:transform .2s, box-shadow .2s, background .2s}
     .btn-submit:hover{transform:translateY(-2px);box-shadow:0 10px 20px rgba(127,212,249,.35);background:rgba(127,212,249,.28)}
 
-    .form-note{font-size:.92rem;opacity:.9;margin-top:.5rem}
+    /* Meldungen */
     .form-messages{margin-top:.8rem;min-height:1.4rem}
     .form-messages .ok,.form-messages .err{padding:.6rem .8rem;border-radius:10px}
     .form-messages .ok{background:rgba(40,180,99,.15);border:1px solid rgba(40,180,99,.35);color:#a8ffcf}
     .form-messages .err{background:rgba(231,76,60,.15);border:1px solid rgba(231,76,60,.35);color:#ffd6d2}
 
-    /* Footer-Logo */
+    /* Footer-Logo (schwebend) */
     .abwaerts-logo{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);width:150px;animation:floatLogo 4s ease-in-out infinite}
     @keyframes floatLogo{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-10px)}}
 
@@ -118,7 +100,9 @@
   </style>
 </head>
 <body>
+  <!-- Partikel-Hintergrund per JS erzeugt -->
   <canvas class="particles"></canvas>
+
   <div class="container">
     <div class="card">
       <div class="banner-wrap">
@@ -166,6 +150,7 @@
           <div class="form-messages" role="status" aria-live="polite" aria-atomic="true"></div>
         </form>
 
+        <!-- Datenschutzhinweis / Datenschutz -->
         <h3 id="datenschutz">Datenschutzhinweis</h3>
         <p><strong>Verantwortliche:</strong> Andrea Lichtinger (Adresse wie oben). <strong>Zweck:</strong> Beantwortung deiner Anfrage. <strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse), bei Vertragsanbahnung zusätzlich Art. 6 Abs. 1 lit. b DSGVO.</p>
 
@@ -188,28 +173,55 @@
         <p>Für Inhalte verlinkter Seiten sind ausschließlich deren Betreiber verantwortlich. Rechtswidrige Inhalte waren zum Zeitpunkt der Verlinkung nicht erkennbar. Bei Bekanntwerden von Rechtsverletzungen entfernen wir derartige Links umgehend.</p>
       </div>
 
+      <!-- Fuß-Logo aktiv -->
       <img src="logo-abwaertskompatibel.png" alt="Abwärtskompatibel Logo" class="abwaerts-logo" />
     </div>
   </div>
 
   <script>
-  // Partikel‑Hintergrund (leicht & performant)
+  // Partikel-Hintergrund (gleichmäßig über ganze Seite)
   (function(){
-    let cvs=document.querySelector('canvas.particles');
-    if(!cvs){cvs=document.createElement('canvas');cvs.className='particles';document.body.appendChild(cvs);} 
+    const cvs=document.querySelector('canvas.particles');
     const ctx=cvs.getContext('2d');
-    let w,h; const DPR=Math.min(2, window.devicePixelRatio||1);
-    function resize(){ w=innerWidth; h=innerHeight; cvs.width=w*DPR; cvs.height=h*DPR; cvs.style.width=w+'px'; cvs.style.height=h+'px'; ctx.setTransform(DPR,0,0,DPR,0,0);} 
-    addEventListener('resize',resize,{passive:true}); resize();
-    const isMobile=matchMedia('(max-width:640px)').matches;
-    const N=isMobile?18:36;
-    const P=Array.from({length:N},()=>({x:Math.random()*w,y:Math.random()*h,r:1+Math.random()*2,dx:(Math.random()-.5)*0.35,dy:(Math.random()-.5)*0.35}));
-    let running=true; document.addEventListener('visibilitychange',()=>{ running=!document.hidden; });
-    function tick(){ if(!running){ requestAnimationFrame(tick); return; }
-      ctx.clearRect(0,0,w,h); ctx.fillStyle='rgba(127,212,249,0.6)';
-      for(const p of P){ ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fill(); p.x+=p.dx; p.y+=p.dy; if(p.x<0||p.x>w) p.dx*=-1; if(p.y<0||p.y>h) p.dy*=-1; }
+    let w=0,h=0; const DPR=Math.min(2, window.devicePixelRatio||1);
+    function resize(){
+      const bw=document.documentElement.clientWidth;
+      const bh=document.documentElement.clientHeight;
+      if(bw===w && bh===h) return;
+      w=bw; h=bh;
+      cvs.width=w*DPR; cvs.height=h*DPR;
+      cvs.style.width=w+'px'; cvs.style.height=h+'px';
+      ctx.setTransform(DPR,0,0,DPR,0,0);
+      // Re‑seed Partikel bei Größenänderung, damit sie nicht auf eine Seite „driften“
+      seed();
+    }
+    addEventListener('resize',resize,{passive:true});
+
+    let P=[]; const BASE_DENSITY=0.00005; // Partikel pro Pixel (skaliert mit Fläche)
+    function seed(){
+      const area=w*h; const count=Math.max(20, Math.floor(area*BASE_DENSITY));
+      P=Array.from({length:count},()=>({
+        x:Math.random()*w,
+        y:Math.random()*h,
+        r:1+Math.random()*2,
+        dx:(Math.random()-.5)*0.35,
+        dy:(Math.random()-.5)*0.35
+      }));
+    }
+
+    function tick(){
+      ctx.clearRect(0,0,w,h);
+      ctx.fillStyle='rgba(127,212,249,0.65)';
+      for(const p of P){
+        ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fill();
+        p.x+=p.dx; p.y+=p.dy;
+        if(p.x<0||p.x>w) p.dx*=-1;
+        if(p.y<0||p.y>h) p.dy*=-1;
+      }
       requestAnimationFrame(tick);
     }
+
+    resize(); // initiale Größe + seed
     tick();
   })();
 
@@ -241,4 +253,3 @@
   </script>
 </body>
 </html>
-
